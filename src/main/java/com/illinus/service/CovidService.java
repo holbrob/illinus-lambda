@@ -13,6 +13,10 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+import org.glassfish.jersey.client.ClientConfig;
+
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.illinus.util.CovidUtil;
 import com.illinus.vo.ClientUsCurrentVo;
 import com.illinus.vo.ClientUsDailyVo;
@@ -27,6 +31,8 @@ public class CovidService {
     private static NumberFormat numberFormat = NumberFormat.getInstance();
     private static NumberFormat doubleFormat = NumberFormat.getInstance();
     private static NumberFormat percentFormat = NumberFormat.getInstance();
+    
+    static final Logger logger = Logger.getLogger(CovidService.class);
     
     static {
         numberFormat.setGroupingUsed(true);
@@ -66,7 +72,7 @@ public class CovidService {
 	    SimpleDateFormat sdfIn = new SimpleDateFormat("yyyyMMdd");
 	    SimpleDateFormat sdfOut = new SimpleDateFormat("MMM dd");
 	    
-	    Client client = ClientBuilder.newClient();
+	    Client client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
 	    Response response = client.target(targetUrl).request().get();
 	    ClientUsDailyVo[] clientUsDailyVoList = response.readEntity(ClientUsDailyVo[].class);
 
@@ -137,7 +143,7 @@ public class CovidService {
 	    String targetUrl = "https://covidtracking.com/api/v1/states/current.json";
 
 	    
-	    Client client = ClientBuilder.newClient();
+	    Client client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
 	    Response response = client.target(targetUrl).request().get();
 	    ClientUsCurrentVo[] clientUsCurrentVoList = response.readEntity(ClientUsCurrentVo[].class);
 
@@ -201,7 +207,7 @@ public class CovidService {
 		
 	    String targetUrl = "https://covidtracking.com/api/v1/states/daily.json";
 		
-	    Client client = ClientBuilder.newClient();
+	    Client client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
 	    Response response = client.target(targetUrl).request().get();
 	    ClientUsDailyVo[] clientUsDailyVoList = response.readEntity(ClientUsDailyVo[].class);
 
@@ -287,6 +293,7 @@ public class CovidService {
 	 * @return
 	 */
 	public List<UsCurrentVo> getAllStateRecent(int queryDays) {
+		logger.info("In getAllStateRecent:" + queryDays);
 		List<UsCurrentVo> recentStateList = new ArrayList<UsCurrentVo>();
 		List<StateVo> stateVoList = covidUtil.buildStateList();
 		List<ClientUsDailyVo> allDatalist = getAllData();
@@ -295,6 +302,9 @@ public class CovidService {
 			recentStateList.add(usCurrentVo);
 			
 		}
+		
+		logger.info("Out of getAllStateRecent:" + recentStateList.size());
+
 		
 		return recentStateList;		
 	}

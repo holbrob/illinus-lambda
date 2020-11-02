@@ -1,15 +1,17 @@
 package com.illinus.vo;
 
+import javax.ws.rs.QueryParam;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientUsCurrentVo {
 	
-	private String state;
-	private int positive;
-	private int hospitalizedCurrently;
-	private int death;
-	private int totalTestResults;
+	@QueryParam("state") private String state;
+	@QueryParam("positive") private int positive;
+	@QueryParam("hospitalizedCurrently") private int hospitalizedCurrently;
+	@QueryParam("death") private int death;
+	@QueryParam("totalTestResults") private int totalTestResults;
 	
 	
 	public String getState() {

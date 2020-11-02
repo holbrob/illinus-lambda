@@ -4,7 +4,7 @@
     <groupId>com.illinus</groupId>
     <artifactId>illness-lambda-v5</artifactId>
     <packaging>jar</packaging>
-    <version>0.5.5</version>
+    <version>1.0.0</version>
     <properties>
         <lambada.version>0.0.6</lambada.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,21 +15,41 @@
         <!-- Stage to deploy -->
         <deployment.stage>production</deployment.stage>
         <!-- Maximum execution time for lambda -->
-        <deployment.maximumExecutionTime>10</deployment.maximumExecutionTime>
+        <deployment.maximumExecutionTime>60</deployment.maximumExecutionTime>
         <!-- Maximum allowed memory usage for lambda -->
         <deployment.lambdaMemorySize>1024</deployment.lambdaMemorySize>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.lambadaframework</groupId>
-            <artifactId>runtime</artifactId>
-            <version>${lambada.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-lambda-java-log4j</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+	<dependency>
+		<groupId>org.lambadaframework</groupId>
+		<artifactId>runtime</artifactId>
+		<version>${lambada.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.amazonaws</groupId>
+		<artifactId>aws-lambda-java-log4j</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.jaxrs</groupId>
+		<artifactId>jackson-jaxrs-json-provider</artifactId>
+		<version>2.11.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-core</artifactId>
+		<version>2.11.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.11.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-annotations</artifactId>
+		<version>2.11.3</version>
+	</dependency>
     </dependencies>
     <build>
         <plugins>
