@@ -4,7 +4,7 @@
     <groupId>com.illinus</groupId>
     <artifactId>illness-lambda-v5</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <properties>
         <lambada.version>0.0.6</lambada.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

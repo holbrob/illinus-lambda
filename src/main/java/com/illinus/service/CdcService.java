@@ -56,7 +56,7 @@ public class CdcService {
 	    } else {
 	    	targetUrl = "https://data.cdc.gov/resource/9mfq-cb36.json?state=" + parmsVo.getStateCd().toUpperCase();
 	    }
-	    SimpleDateFormat sdfIn = new SimpleDateFormat("yyyyMMdd");
+	    SimpleDateFormat sdfIn = new SimpleDateFormat("yyyy-MM-dd");
 	    SimpleDateFormat sdfOut = new SimpleDateFormat("MMM dd");
 	    
 	    Client client = ClientBuilder.newClient(new ClientConfig(JacksonJsonProvider.class));
