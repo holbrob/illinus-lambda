@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
+import com.illinus.service.CdcService;
 import com.illinus.service.CovidService;
 import com.illinus.vo.ParmsVo;
 import com.illinus.vo.UsCurrentVo;
@@ -19,6 +20,7 @@ import com.illinus.vo.UsDailyVo;
 public class CovidController {
 	
 	private CovidService covidService = new CovidService();
+	private CdcService cdcService = new CdcService();
 
 
     static final Logger logger = Logger.getLogger(CovidController.class);
@@ -104,6 +106,19 @@ public class CovidController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<UsCurrentVo> getUsRecent(@PathParam("queryDays") String queryDays) {
     	return covidService.getAllStateRecent(Integer.parseInt(queryDays));
+    }
+    
+    @GET
+    @Path("/v2/statedaily/{stateCd}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UsDailyVo> getV2StateDaily(@PathParam("stateCd") String stateCd) {
+    	ParmsVo parmsVo = new ParmsVo();
+    	parmsVo.setStateCd(stateCd);
+    	parmsVo.setMaxRowsToReturn(90);
+    	parmsVo.setTotalRollingAvgDayQty(7);
+    	parmsVo.setChangeRollingAvgDayQty(7);
+    	parmsVo.setOutputDayQty(1);
+    	return cdcService.getStateDaily(parmsVo);
     }
 
 }
